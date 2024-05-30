@@ -1,0 +1,37 @@
+struct DeviListHeader
+{
+   char[8] magic; // DeviList
+   float version;
+   uint32 fileCount;
+   uint32 pathChunksCount;
+   uint32 pathChunksInfoOffset;
+   uint32 pathChunksOffset;
+   uint32 reserved;
+}
+
+struct PerFileInfo
+{
+   uint32 HashOrUniqueID;
+   uint16 pathChunkID;
+   uint16 pathPosInChunk;
+}
+
+struct PathChunksInfoOffset
+{
+   uint32 pathChunkStart;
+   uint32 pathchunkUncmpSize;  // max size is 32767
+   uint32 pathChunkCmpSize;
+}
+
+struct PathStructure
+{
+   PositionInArc_Hex|UncmpSize_hex|CmpSize_hex|Virtual-Filepath\0
+}
+
+
+struct DeviArcHeader
+{
+   char[8] magic; // DeviARC\0
+   float version;
+   uint32 fileCount;
+}
