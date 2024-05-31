@@ -21,7 +21,7 @@ namespace DeviArchiveMaker.PackClasses
         private static Dictionary<int, List<byte>> _newPathChunksDict = new Dictionary<int, List<byte>>();
         private static Dictionary<int, List<ushort>> _newPerPathInfoDict = new Dictionary<int, List<ushort>>();
 
-        private static readonly string[] _compressionExclusionExtns = new string[]
+        private static readonly string[] _noCompressionExtns = new string[]
         {
             ""
         };
@@ -109,7 +109,7 @@ namespace DeviArchiveMaker.PackClasses
 
                     var fileToPackData = new byte[] { };
 
-                    if (_compressionExclusionExtns.Contains(Path.GetExtension(fileToPack)))
+                    if (_noCompressionExtns.Contains(Path.GetExtension(fileToPack)))
                     {
                         fileToPackData = File.ReadAllBytes(fileToPack);
 

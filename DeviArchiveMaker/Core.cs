@@ -62,7 +62,7 @@ namespace DeviArchiveMaker
                         break;
 
 
-                    case ActionSwitches.uaf:
+                    case ActionSwitches.uf:
                         if (args.Length < 4)
                         {
                             Console.WriteLine("Error: Enough arguments not specified for the specified '-uf' switch");

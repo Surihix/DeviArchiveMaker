@@ -10,7 +10,7 @@ namespace DeviArchiveMaker
             Console.WriteLine("-p = Pack a folder with files to a devi archive file");
             Console.WriteLine("-u = Unpack a devi archive file");
             Console.WriteLine("");
-            Console.WriteLine("-uaf = Unpack a specific file from the devi archive file");
+            Console.WriteLine("-uf = Unpack a specific file from the devi archive file");
             Console.WriteLine("-up = Unpack all file paths from the archive to a text file");
             Console.WriteLine("-? or -h = Show app functions");
             Console.WriteLine("");
@@ -28,7 +28,7 @@ namespace DeviArchiveMaker
             Console.WriteLine("To Pack a folder: DeviArchiveMaker -p " + @"""Folder To pack""" + " -c3");
             Console.WriteLine("To Unpack a file: DeviArchiveMaker -u " + @"""FileName.devilist""" + " " + @"""FileName.deviarc""");
             Console.WriteLine("");
-            Console.WriteLine("To Unpack single file: DeviArchiveMaker -uaf " + @"""FileName.devilist""" + " " + @"""FileName.deviarc""" + " " + @"""MyStuff\TestFiles\Readme.pdf""");
+            Console.WriteLine("To Unpack single file: DeviArchiveMaker -uf " + @"""FileName.devilist""" + " " + @"""FileName.deviarc""" + " " + @"""MyStuff\TestFiles\Readme.pdf""");
             Console.WriteLine("To Unpack file paths: DeviArchiveMaker -up " + @"""FileName.devilist""");
             Console.ReadLine();
             Environment.Exit(0);
