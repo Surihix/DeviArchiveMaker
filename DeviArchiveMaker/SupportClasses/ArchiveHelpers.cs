@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace DeviArchiveMaker.SupportClasses
 {
@@ -29,6 +27,15 @@ namespace DeviArchiveMaker.SupportClasses
             if (File.Exists(fileToCheck))
             {
                 File.Delete(fileToCheck);
+            }
+        }
+
+
+        public static void IfDirExistsDel(string dirToCheck)
+        {
+            if (Directory.Exists(dirToCheck))
+            {
+                Directory.Delete(dirToCheck, true);
             }
         }
     }

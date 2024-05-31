@@ -1,12 +1,18 @@
+
+// Filelist file:
+//
+// .devilist
+//
 struct DeviListHeader
 {
    char[8] magic; // DeviList
    float version;
    uint32 fileCount;
-   uint32 pathChunksCount;
+   uint16 pathChunksCount;
+   uint16 reservedA;
    uint32 pathChunksInfoOffset;
    uint32 pathChunksOffset;
-   uint32 reserved;
+   uint32 reservedB;
 }
 
 struct PerFileInfo
@@ -29,6 +35,10 @@ struct PathStructure
 }
 
 
+// Archive file:
+//
+// .deviarc
+//
 struct DeviArcHeader
 {
    char[8] magic; // DeviARC\0

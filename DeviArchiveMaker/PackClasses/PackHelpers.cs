@@ -3,6 +3,7 @@ using Ionic.Zlib;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using static DeviArchiveMaker.SupportClasses.ArchiveEnums;
 using static DeviArchiveMaker.SupportClasses.ArchiveVariables;
@@ -19,6 +20,11 @@ namespace DeviArchiveMaker.PackClasses
         private static Dictionary<int, List<ushort>> _perPathInfoDict = new Dictionary<int, List<ushort>>();
         private static Dictionary<int, List<byte>> _newPathChunksDict = new Dictionary<int, List<byte>>();
         private static Dictionary<int, List<ushort>> _newPerPathInfoDict = new Dictionary<int, List<ushort>>();
+
+        private static readonly string[] _compressionExclusionExtns = new string[]
+        {
+            ""
+        };
 
 
         public static void ArrangeFilePaths(string[] filesInDir)
@@ -76,6 +82,7 @@ namespace DeviArchiveMaker.PackClasses
                 var index = currentPathChunkItemsCount;
                 var key = -1;
                 var positionCounter = -1;
+                var packedAs = string.Empty;
 
                 for (int f = 0; f < FileCount; f++)
                 {
@@ -102,23 +109,35 @@ namespace DeviArchiveMaker.PackClasses
 
                     var fileToPackData = new byte[] { };
 
-                    switch (CmpLvl)
+                    if (_compressionExclusionExtns.Contains(Path.GetExtension(fileToPack)))
                     {
-                        case CompressionLvls.c0:
-                            fileToPackData = File.ReadAllBytes(fileToPack);
-                            break;
+                        fileToPackData = File.ReadAllBytes(fileToPack);
 
-                        case CompressionLvls.c1:
-                            fileToPackData = File.ReadAllBytes(fileToPack).ZlibCompressWithLvl(CompressionLevel.BestSpeed);
-                            break;
+                        if (CmpLvl != CompressionLvls.c0)
+                        {
+                            packedAs = "(Uncompressed)";
+                        }
+                    }
+                    else
+                    {
+                        switch (CmpLvl)
+                        {
+                            case CompressionLvls.c0:
+                                fileToPackData = File.ReadAllBytes(fileToPack);
+                                break;
 
-                        case CompressionLvls.c2:
-                            fileToPackData = File.ReadAllBytes(fileToPack).ZlibCompressWithLvl(CompressionLevel.Default);
-                            break;
+                            case CompressionLvls.c1:
+                                fileToPackData = File.ReadAllBytes(fileToPack).ZlibCompressWithLvl(CompressionLevel.BestSpeed);
+                                break;
 
-                        case CompressionLvls.c3:
-                            fileToPackData = File.ReadAllBytes(fileToPack).ZlibCompressWithLvl(CompressionLevel.BestCompression);
-                            break;
+                            case CompressionLvls.c2:
+                                fileToPackData = File.ReadAllBytes(fileToPack).ZlibCompressWithLvl(CompressionLevel.Default);
+                                break;
+
+                            case CompressionLvls.c3:
+                                fileToPackData = File.ReadAllBytes(fileToPack).ZlibCompressWithLvl(CompressionLevel.BestCompression);
+                                break;
+                        }
                     }
 
                     var cSize = fileToPackData.Length;
@@ -129,7 +148,7 @@ namespace DeviArchiveMaker.PackClasses
                     // in the file's path string and add it 
                     // to the new dictionaries
                     var sb = new StringBuilder();
-                    sb.Append(position).Append("|").Append(uSize).Append("|").Append(cSize).Append("|").Append(currentPath).Append("\0");
+                    sb.Append(position).Append("|").Append(uSize).Append("|").Append(cSize.ToString("x")).Append("|").Append(currentPath).Append("\0");
 
                     var currentPathRaw = Encoding.UTF8.GetBytes(sb.ToString());
                     var currentPathLength = currentPathRaw.Length;
@@ -141,7 +160,8 @@ namespace DeviArchiveMaker.PackClasses
 
                     index++;
 
-                    Console.WriteLine($"Packed {currentPath}");
+                    Console.WriteLine($"Packed {Path.GetFileName(dirToPack)}\\{currentPath} {packedAs}");
+                    packedAs = string.Empty;
                 }
             }
         }

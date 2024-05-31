@@ -5,17 +5,9 @@ namespace DeviArchiveMaker.SupportClasses
 {
     internal static class ZlibHelpers
     {
-        public static void ZlibDecompress(this Stream cmpStreamName, Stream outStreamName)
+        public static byte[] ZlibDecompressBuffer(this byte[] dataToDcmp)
         {
-            using (ZlibStream decompressor = new ZlibStream(cmpStreamName, CompressionMode.Decompress))
-            {
-                decompressor.CopyTo(outStreamName);
-            }
-        }
-
-        public static byte[] ZlibDecompressBuffer(this MemoryStream cmpStreamName)
-        {
-            return ZlibStream.UncompressBuffer(cmpStreamName.ToArray());
+            return ZlibStream.UncompressBuffer(dataToDcmp);
         }
 
         public static byte[] ZlibCompressWithLvl(this byte[] dataToCmp, CompressionLevel compressionLevel)

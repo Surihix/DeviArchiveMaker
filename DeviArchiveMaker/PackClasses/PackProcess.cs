@@ -21,7 +21,6 @@ namespace DeviArchiveMaker.PackClasses
                 dirToPack = dirToPack.Remove(dirNameLength - 1, 1);
             }
 
-
             var outListFile = Path.Combine(Path.GetDirectoryName(dirToPack), Path.GetFileName(dirToPack) + ".devilist");
             var outArcFile = Path.Combine(Path.GetDirectoryName(dirToPack), Path.GetFileName(dirToPack) + ".deviarc");
 

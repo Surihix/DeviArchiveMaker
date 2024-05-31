@@ -1,6 +1,7 @@
 ﻿using DeviArchiveMaker.PackClasses;
 using DeviArchiveMaker.UnpackClasses;
 using System;
+using System.Text;
 using static DeviArchiveMaker.SupportClasses.ArchiveEnums;
 
 namespace DeviArchiveMaker
@@ -11,6 +12,7 @@ namespace DeviArchiveMaker
         {
             try
             {
+                Console.OutputEncoding = Encoding.UTF8;
                 Console.WriteLine("");
 
                 if (args.Length < 1)
