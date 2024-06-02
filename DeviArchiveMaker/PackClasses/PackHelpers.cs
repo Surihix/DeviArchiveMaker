@@ -21,6 +21,8 @@ namespace DeviArchiveMaker.PackClasses
         private static Dictionary<int, List<byte>> _newPathChunksDict = new Dictionary<int, List<byte>>();
         private static Dictionary<int, List<ushort>> _newPerPathInfoDict = new Dictionary<int, List<ushort>>();
 
+        // Add extensions of files that
+        // you don't want to compress 
         private static readonly string[] _noCompressionExtns = new string[]
         {
             ""
@@ -167,6 +169,10 @@ namespace DeviArchiveMaker.PackClasses
         }
 
 
+        // Implement a unique function 
+        // that takes the path string
+        // and converts it to a uint
+        // number
         private static uint GenerateUniqueID(string[] filesInDir, int index)
         {
             var currentPath = filesInDir[index];
