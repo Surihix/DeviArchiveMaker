@@ -27,18 +27,12 @@ namespace DeviArchiveMaker
                     Help.ShowCommands();
                 }
 
-                var toolAction = new ActionSwitches();
-                var compressionLvl = new CompressionLvls();
                 var listFile = string.Empty;
                 var arcFile = string.Empty;
                 var singleFilePath = string.Empty;
                 var dirToPack = string.Empty;
 
-                if (Enum.TryParse(args[0].Replace("-", ""), out ActionSwitches actionConvtd))
-                {
-                    toolAction = actionConvtd;
-                }
-                else
+                if (Enum.TryParse(args[0].Replace("-", ""), out ActionSwitches toolAction) == false)
                 {
                     Console.WriteLine("Error: Specified action switch was invalid");
                     Console.ReadLine();
@@ -102,11 +96,7 @@ namespace DeviArchiveMaker
 
                         dirToPack = args[1];
 
-                        if (Enum.TryParse(args[2].Replace("-", ""), out CompressionLvls compressionLvlConvtd))
-                        {
-                            compressionLvl = compressionLvlConvtd;
-                        }
-                        else
+                        if (Enum.TryParse(args[2].Replace("-", ""), out CompressionLvls compressionLvl) == false)
                         {
                             Console.WriteLine("Error: Specified compression level switch was invalid");
                             Console.ReadLine();

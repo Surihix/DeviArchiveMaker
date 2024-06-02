@@ -75,7 +75,6 @@ namespace DeviArchiveMaker.UnpackClasses
             ArchiveHelpers.CheckIfFileExists(arcFile);
 
             var unpackDir = Path.Combine(Path.GetDirectoryName(arcFile), Path.GetFileNameWithoutExtension(arcFile));
-            ArchiveHelpers.IfDirExistsDel(unpackDir);
 
             using (var listReader = new BinaryReader(File.Open(listFile, FileMode.Open, FileAccess.Read)))
             {
