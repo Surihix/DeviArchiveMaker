@@ -177,7 +177,7 @@ namespace DeviArchiveMaker.PackClasses
         {
             var currentPath = filesInDir[index];
 
-            return 0;
+            return uint.MaxValue;
         }
 
 
