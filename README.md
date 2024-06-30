@@ -2,4 +2,4 @@ This C# program is an upgraded version of my [DeviPackUnpackTool](https://github
 
 The generated archive file and the filelist will have the same name of the folder that was packed along with a .deviarc and .devilist as the file extensions.
 
-Please launch the program with '-h' or '-?' switches to know more about the functions.
+Please launch the program with `-h` or `-?` switches to know more about the functions.
